@@ -29,6 +29,7 @@
      javascript
      markdown
      org
+     osx
      ruby
      (shell :variables
             shell-default-height 30
