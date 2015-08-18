@@ -22,6 +22,7 @@
      clojure
      emacs-lisp
      git
+     github
      go
      handlebars
      haskell
@@ -162,6 +163,9 @@ before layers configuration."
    dotspacemacs-default-package-repository nil
    )
   ;; User initialization goes here
+  (setq-default
+   ruby-version-manager `rbenv
+   ruby-enable-ruby-on-rails-support t)
   )
 
 (defun dotspacemacs/config ()
