@@ -5,9 +5,13 @@ set -gx EDITOR vim
 set PATH ~/bin $PATH
 
 # rbenv
-status --is-interactive; and . (rbenv init -|psub)
+if test (which rbenv)
+    status --is-interactive; and . (rbenv init -|psub)
+end
 
-eval (hub alias -s)
+if test (which rbenv)
+    eval (hub alias -s)
+end
 
 if test -f ~/.config/fish/local.fish
   . ~/.config/fish/local.fish
