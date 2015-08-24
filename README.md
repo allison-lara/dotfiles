@@ -6,6 +6,8 @@ Includes:
 
 * fish
 * tmux
+* spacemacs
+* vim
 
 ## Setup
 
@@ -17,4 +19,4 @@ Everything should get symlinked to the appropriate `~/rc` file
 
 ## TODO
 
-vimfiles and whatever else I can think of
+bunch of other crap
