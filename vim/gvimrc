@@ -1,0 +1,3 @@
+set guioptions-=T
+set columns=87
+set lines=70

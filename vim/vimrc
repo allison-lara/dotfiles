@@ -1,0 +1,179 @@
+" Vundle
+set shell=/bin/bash
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Plugins
+Plugin 'gmarik/Vundle.vim'
+
+Plugin 'bling/vim-airline'
+Plugin 'kien/ctrlp.vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-endwise'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'rking/ag.vim'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'aaronj1335/underscore-templates.vim'
+Plugin 'guns/vim-clojure-static'
+Plugin 'tpope/vim-fireplace'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'pangloss/vim-javascript'
+Plugin 'marijnh/tern_for_vim'
+Plugin 'mxw/vim-jsx'
+Plugin 'scrooloose/syntastic'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'rhysd/committia.vim'
+Plugin 'fatih/vim-go'
+Plugin 'dag/vim-fish'
+
+call vundle#end()
+filetype plugin indent on
+
+set showcmd
+let mapleader=","
+let maplocalleader=",,"
+
+" Editor layout {{{
+set termencoding=utf-8
+set encoding=utf-8
+set lazyredraw
+set laststatus=2        " Always add status line even if one window.
+set showtabline=2       " Always show tab bar
+set cmdheight=2         " 2 row status
+set number              " line numbers
+
+set ruler
+"}}}
+
+" Whitespace
+set nowrap                      " Don't wrap
+set tabstop=4 shiftwidth=4      " four space tabs
+set expandtab                   " spaces not tabs
+set backspace=indent,eol,start  " Allow backspace over anything in ins
+
+" Searching
+set hlsearch                    " hightlight matches
+set incsearch                   " incremental search
+set ignorecase                  " searches are case insensitive...
+set smartcase                   " ... unless you start using case
+
+set listchars=tab:»·,trail:·,extends:#,nbsp:·
+set pastetoggle=<F2>
+nnoremap <F8> :setl noai nocin nosi inde=<CR>
+" }}}
+
+" Vim behavior
+set history=1000
+set undolevels=1000
+set nobackup
+set noswapfile
+
+set noerrorbells		" Silence, you!
+
+set wildignore+=*.o,*.obj,.git,.svn,pkg,*node_modules*
+set wildignore+=*vendor/bundle/*,*vendor/cache/*,*vendor/gems/*,*vendor/jetty*
+
+"" Highlighting, colors, and look
+set guifont=Source_Code_Pro:h12
+
+syntax enable
+
+if (has("gui_running"))
+    set background=light
+else
+    set background=dark
+    let g:solarized_contrast="high"
+endif
+"" Hackityhack
+set t_Co=256
+let g:solarized_termcolors=256
+colorscheme solarized
+
+"" Current line, only in insert mode
+autocmd InsertLeave * set nocursorline
+autocmd InsertEnter * set cursorline
+
+"" File type settings
+au BufNewFile,BufRead *.cshtml set filetype=html
+au BufNewFile,BufRead Gemfile set filetype=ruby
+au BufNewFile,BufRead *.md set filetype=markdown
+autocmd Filetype gitcommit setlocal spell textwidth=72
+autocmd Filetype markdown setlocal spell textwidth=72
+au VimEnter * RainbowParenthesesActivate
+autocmd FileType javascript RainbowParenthesesLoadBraces
+autocmd FileType jsx RainbowParenthesesLoadBraces
+autocmd FileType clojure RainbowParenthesesLoadRound
+
+"" Key Mappings
+nmap <silent> <leader>/ :silent :nohlsearch<CR>
+
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+nmap <silent> <leader>sc :SyntasticCheck<CR>
+nnoremap <silent> <Left> :GitGutterPrevHunk<CR>
+nnoremap <silent> <Right> :GitGutterNextHunk<CR>
+inoremap <silent> <Left> :GitGutterPrevHunk<CR>
+inoremap <silent> <Right> :GitGutterNextHunk<CR>
+nnoremap <C-N> :CtrlPBuffer<CR>
+
+"" Quick swap between normal and relative line numbers
+function! NumberToggle()
+    if(&relativenumber == 1)
+        set norelativenumber
+    else
+        set relativenumber
+    endif
+endfunc
+
+nnoremap <C-L> :call NumberToggle()<cr>
+
+"" Clear highlight on sign gutter, for gitgutter
+highlight clear SignColumn
+
+"" Marked support on OSX
+" if has("gui_macvim")
+    :nnoremap <leader>m :silent !open -a 'Marked 2.app' '%:p'<cr>
+" endif
+
+"" Syntastic suggested config
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_ruby_checkers = ['rubocop', 'mri']
+let g:syntastic_ruby_rubocop_exec = '/Users/allisonkeene/.rbenv/shims/rubocop'
+
+"" Airline
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.whitespace = 'Ξ'
+
+"" Bring in local settings that shouldn't be in public repo
+if filereadable($HOME . "/vimfiles/vimrc.local")
+    source $HOME/vimfiles/vimrc.local
+endif
+if filereadable($HOME . "/.vim/vimrc.local")
+    source $HOME/.vim/vimrc.local
+endif
+
