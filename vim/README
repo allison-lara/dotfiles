@@ -1,7 +1,0 @@
-My own vimfiles.
-
-- Mon Jan 12 2015
-Another reboot and convert from pathogen to vundle.
-
-- Tue Dec 13 2011 
-Reboot vimrc to a basic set and remove most plugins. Keep things to a minimum until I need them and don't just blindly follow sample vimrc files.
