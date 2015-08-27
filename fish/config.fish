@@ -5,11 +5,11 @@ set -gx EDITOR vim
 set PATH ~/bin $PATH
 
 # rbenv
-if test (which rbenv)
+if test (which rbenv ^ /dev/null)
     status --is-interactive; and . (rbenv init -|psub)
 end
 
-if test (which rbenv)
+if test (which hub ^ /dev/null)
     eval (hub alias -s)
 end
 
