@@ -32,6 +32,7 @@ Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'rhysd/committia.vim'
 Plugin 'fatih/vim-go'
 Plugin 'dag/vim-fish'
+Plugin 'tomasr/molokai'
 
 call vundle#end()
 filetype plugin indent on
@@ -81,7 +82,7 @@ set wildignore+=*.o,*.obj,.git,.svn,pkg,*node_modules*
 set wildignore+=*vendor/bundle/*,*vendor/cache/*,*vendor/gems/*,*vendor/jetty*
 
 "" Highlighting, colors, and look
-set guifont=Source_Code_Pro:h12
+set guifont=Sauce_Code_Powerline:h13
 
 syntax enable
 
@@ -94,7 +95,7 @@ endif
 "" Hackityhack
 set t_Co=256
 let g:solarized_termcolors=256
-colorscheme solarized
+colorscheme molokai
 
 "" Current line, only in insert mode
 autocmd InsertLeave * set nocursorline
@@ -162,8 +163,8 @@ if !exists('g:airline_symbols')
 endif
 
 " unicode symbols
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '◀'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
 let g:airline_symbols.linenr = '␊'
 let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.paste = 'ρ'
