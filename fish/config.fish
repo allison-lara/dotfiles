@@ -2,6 +2,7 @@
 . ~/.config/fish/z.fish
 
 set -gx EDITOR vim
+set -gx TZ 'America/Los_Angeles'
 set PATH ~/bin $PATH
 
 # rbenv
