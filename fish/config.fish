@@ -15,5 +15,11 @@ if test (which hub ^ /dev/null)
 end
 
 if test -f ~/.config/fish/local.fish
-  . ~/.config/fish/local.fish
+    . ~/.config/fish/local.fish
 end
+
+if test -d ~/go
+    set -gx GOPATH ~/go
+    set PATH $GOPATH/bin $PATH
+end
+
