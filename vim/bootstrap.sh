@@ -6,5 +6,5 @@ git clone https://github.com/gmarik/Vundle.vim bundle/Vundle.vim
 vim +BundleInstall +qall
 
 cd bundle/YouCompleteMe
-./install.sh --clang-compiler
+./install.py --clang-completer --gocode-completer
 
