@@ -23,3 +23,6 @@ if test -d ~/go
     set PATH $GOPATH/bin $PATH
 end
 
+if test (which direnv ^ /dev/null)
+    eval (direnv hook fish)
+end
