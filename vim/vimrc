@@ -84,6 +84,7 @@ set noerrorbells		" Silence, you!
 
 set wildignore+=*.o,*.obj,.git,.svn,pkg,*node_modules*
 set wildignore+=*vendor/bundle/*,*vendor/cache/*,*vendor/gems/*,*vendor/jetty*
+set wildignore+=*target/*
 
 "" Highlighting, colors, and look
 set guifont=Sauce_Code_Powerline:h13
