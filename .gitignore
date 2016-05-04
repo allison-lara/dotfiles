@@ -2,3 +2,6 @@ fish_history
 fishd.*
 fish/local.fish
 fish/fish_read_history
+
+git/local.gitconfig
+

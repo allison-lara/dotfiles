@@ -1,0 +1,58 @@
+[user]
+    name = Allison Lara
+[core]
+    editor = ~/rc/git/tmux_vim.sh
+    pager = less -X -R
+[color]
+    ui = true
+[alias]
+    dt = difftool
+    mt = mergetool
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    dlc = diff --cached HEAD^
+    assume = update-index --assume-unchanged
+    unassume = update-index --no-assume-unchanged
+    assumed = "!git ls-files -v | grep ^h | cut -c 3-"
+    unassumeall = "!git assumed | xargs git update-index --no-assume-unchanged"
+    standup = "!git log --since yesterday --author `git config user.email` --pretty=short"
+    st = status -sb
+    authors = "!git log --all --format='%aN <%cE>' | sort -u"
+    sync = "!f(){ local branch=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e \"s/* \\(.*\\)/\\1/\"`; git pull upstream $branch && git push origin $branch; }; f"
+    make-fetch-happen = fetch --all -p --tags
+    praise = blame
+[push]
+    default = upstream
+[difftool]
+    prompt = false
+[mergetool]
+    prompt = false
+[merge]
+    conflictstyle = diff3
+[filter "media"]
+    clean = git media clean %f
+    smudge = git media smudge %f
+    required = true
+[credential]
+    helper = osxkeychain
+[hub]
+    protocol = ssh
+[filter "lfs"]
+    clean = git lfs clean %f
+    smudge = git lfs smudge %f
+    required = true
+[rerere]
+    enabled = true
+[rebase]
+    autoSquash = true
+[color "diff-highlight"]
+    oldNormal = red bold
+    oldHighlight = red bold 52
+    newNormal = green bold
+    newHighlight = green bold 22
+[pager]
+    diff = diff-so-fancy | less --tabs=4 -RFX
+    show = diff-so-fancy | less --tabs=4 -RFX
+[include]
+    path = local.gitconfig

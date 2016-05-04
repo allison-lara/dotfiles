@@ -9,5 +9,6 @@ popd
 
 mkdir -p ~/.config
 pushd ~/.config
-ln -Fs fish ~/rc/fish
+ln -Fs ~/rc/fish fish
+ln -Fs ~/rc/git git
 popd
