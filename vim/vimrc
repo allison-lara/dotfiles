@@ -31,7 +31,10 @@ Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'rhysd/committia.vim'
 Plugin 'dag/vim-fish'
 Plugin 'tomasr/molokai'
-Plugin 'jimenezrick/vimerl'
+Plugin 'vim-erlang/vim-erlang-runtime'
+Plugin 'vim-erlang/vim-erlang-compiler'
+Plugin 'vim-erlang/vim-erlang-omnicomplete'
+Plugin 'vim-erlang/vim-erlang-tags'
 Plugin 'edkolev/erlang-motions.vim'
 
 call vundle#end()
