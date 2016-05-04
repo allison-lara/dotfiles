@@ -20,11 +20,12 @@
      auto-completion
      better-defaults
      clojure
+     ;; cry
+     scala
      emacs-lisp
      git
      github
      go
-     handlebars
      haskell
      html
      javascript
@@ -170,6 +171,9 @@ before layers configuration."
 layers configuration."
   (setq-default js2-basic-offset 2)
   (setq-default js-indent-level 2)
+  (global-linum-mode)
+  (spacemacs/toggle-fill-column-indicator-on)
+  (setq-default clojure-enable-fancify-symbols t)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
