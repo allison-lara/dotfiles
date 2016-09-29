@@ -1,5 +1,6 @@
 . ~/.config/fish/colors.fish
-. ~/.config/fish/z.fish
+# . ~/.config/fish/z.fish
+set -U fish_path $HOME/.fisherman
 
 set -gx EDITOR vim
 set -gx TZ 'America/Los_Angeles'
