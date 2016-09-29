@@ -37,6 +37,9 @@ Plugin 'vim-erlang/vim-erlang-omnicomplete'
 Plugin 'vim-erlang/vim-erlang-tags'
 Plugin 'edkolev/erlang-motions.vim'
 
+"OCaml
+Plugin 'def-lkb/ocp-indent-vim'
+
 call vundle#end()
 filetype plugin indent on
 
@@ -158,6 +161,7 @@ let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
+let g:syntastic_ocaml_checkers = ['merlin']
 let g:syntastic_javascript_checkers = ['standard']
 let g:syntastic_scss_checkers = ['scss_lint']
 let g:syntastic_ruby_checkers = ['rubocop', 'mri']
@@ -175,6 +179,11 @@ let g:airline_symbols.linenr = '␊'
 let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.whitespace = 'Ξ'
+
+" OCaml
+
+let g:opamshare = substitute(system('opam config var share'), '\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 "" Bring in local settings that shouldn't be in public repo
 if filereadable($HOME . "/vimfiles/vimrc.local")

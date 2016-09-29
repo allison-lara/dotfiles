@@ -30,6 +30,7 @@
      html
      javascript
      markdown
+     ocaml
      org
      osx
      ruby
