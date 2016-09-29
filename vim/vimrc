@@ -150,11 +150,20 @@ nmap <silent> <leader>/ :silent :nohlsearch<CR>
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
 nmap <silent> <leader>sc :SyntasticCheck<CR>
+nmap <silent> <leader>ts :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 nnoremap <silent> <Left> :GitGutterPrevHunk<CR>
 nnoremap <silent> <Right> :GitGutterNextHunk<CR>
 inoremap <silent> <Left> :GitGutterPrevHunk<CR>
 inoremap <silent> <Right> :GitGutterNextHunk<CR>
 nnoremap <C-N> :CtrlPBuffer<CR>
+
+au Filetype clojure nmap <c-c><c-k> :Require<cr>
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 "" Quick swap between normal and relative line numbers
 function! NumberToggle()
