@@ -1,7 +1,7 @@
 [user]
     name = Allison Lara
 [core]
-    editor = ~/rc/git/tmux_vim.sh
+	editor = tmux_vim.sh
     pager = less -X -R
 [color]
     ui = true
@@ -19,9 +19,12 @@
     standup = "!git log --since yesterday --author `git config user.email` --pretty=short"
     st = status -sb
     authors = "!git log --all --format='%aN <%cE>' | sort -u"
-    sync = "!f(){ local branch=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e \"s/* \\(.*\\)/\\1/\"`; git pull upstream $branch && git push origin $branch; }; f"
+    sync = "!f(){ local branch=`git symbolic-ref HEAD | cut -d/ -f3-`; git pull upstream $branch && git push origin $branch; }; f"
     make-fetch-happen = fetch --all -p --tags
     praise = blame
+	discard = checkout --
+	staged = diff --cached
+    pr = !"pr() { git fetch upstream pull/$1/head:pr-$1; git checkout pr-$1; }; pr"
 [push]
     default = upstream
 [difftool]
