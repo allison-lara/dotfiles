@@ -27,7 +27,12 @@ if test (which direnv ^ /dev/null)
     eval (direnv hook fish)
 end
 
+if test -d /Applications/Postgres.app
+    set -l PSQL_PATH "/Applications/Postgres.app/Contents/Versions/latest/bin"
+    set PATH $PSQL_PATH $PATH
+end
+
 # OPAM configuration
-. ~/.opam/opam-init/init.fish > /dev/null 2> /dev/null or true
+# . ~/.opam/opam-init/init.fish > /dev/null 2> /dev/null or true
 
 test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
