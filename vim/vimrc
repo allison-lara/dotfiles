@@ -35,6 +35,9 @@ Plugin 'scrooloose/syntastic'
 " Ruby
 Plugin 'tpope/vim-endwise'
 
+" Crystal
+Plugin 'rhysd/vim-crystal'
+
 " Clojure/LISP
 Plugin 'guns/vim-clojure-static'
 Plugin 'kien/rainbow_parentheses.vim'
@@ -108,7 +111,7 @@ set noswapfile
 
 set noerrorbells		" Silence, you!
 
-set wildignore+=*.o,*.obj,.git,.svn,pkg,*node_modules*
+set wildignore+=*.o,*.obj,.git,.svn,pkg,*node_modules*,*venv/*
 set wildignore+=*vendor/bundle/*,*vendor/cache/*,*vendor/gems/*,*vendor/jetty*
 set wildignore+=*target/*
 
@@ -155,6 +158,7 @@ nnoremap <silent> <Right> :GitGutterNextHunk<CR>
 inoremap <silent> <Left> :GitGutterPrevHunk<CR>
 inoremap <silent> <Right> :GitGutterNextHunk<CR>
 nnoremap <C-N> :CtrlPBuffer<CR>
+inoremap <silent> jj <ESC>
 
 au Filetype clojure nmap <c-c><c-k> :Require<cr>
 
