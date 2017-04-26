@@ -23,6 +23,7 @@
     make-fetch-happen = fetch --all -p --tags
     praise = blame
 	discard = checkout --
+    unstage = reset --
 	staged = diff --cached
     pr = !"pr() { git fetch upstream pull/$1/head:pr-$1; git checkout pr-$1; }; pr"
 [push]
