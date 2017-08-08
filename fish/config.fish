@@ -4,6 +4,7 @@
 set -gx EDITOR vim
 set -gx TZ 'America/Los_Angeles'
 set PATH ~/bin $PATH
+set JAVA_HOME (/usr/libexec/java_home -v 1.8)
 
 # rbenv
 if test (which rbenv ^ /dev/null)
@@ -21,6 +22,10 @@ end
 if test -d ~/go
     set -gx GOPATH ~/go
     set PATH $GOPATH/bin $PATH
+end
+
+if test -d ~/.local/bin
+    set PATH ~/.local/bin $PATH
 end
 
 if test (which direnv ^ /dev/null)
