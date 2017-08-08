@@ -6,6 +6,8 @@ set -gx TZ 'America/Los_Angeles'
 set PATH ~/bin $PATH
 set JAVA_HOME (/usr/libexec/java_home -v 1.8)
 
+bind \cf complete
+
 # rbenv
 if test (which rbenv ^ /dev/null)
     status --is-interactive; and . (rbenv init -|psub)

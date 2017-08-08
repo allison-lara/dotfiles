@@ -26,6 +26,7 @@
     unstage = reset --
 	staged = diff --cached
     pr = !"pr() { git fetch upstream pull/$1/head:pr-$1; git checkout pr-$1; }; pr"
+    cleanup = !"c() { git branch --merged | grep -v \\* | xargs git branch -d }; c"
 [push]
     default = upstream
 [difftool]

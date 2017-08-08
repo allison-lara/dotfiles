@@ -24,8 +24,9 @@ Plugin 'andreasvc/vim-256noir'
 
 " git
 Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-fugitive'
+" Plugin 'tpope/vim-fugitive'
 Plugin 'rhysd/committia.vim'
+Plugin 'jreybert/vimagit'
 
 " Programming things
 Plugin 'tomtom/tcomment_vim'
@@ -56,6 +57,9 @@ Plugin 'vim-erlang/vim-erlang-compiler'
 Plugin 'vim-erlang/vim-erlang-omnicomplete'
 Plugin 'vim-erlang/vim-erlang-tags'
 Plugin 'edkolev/erlang-motions.vim'
+
+" Elixir
+Plugin 'elixir-lang/vim-elixir'
 
 "OCaml
 Plugin 'def-lkb/ocp-indent-vim'
