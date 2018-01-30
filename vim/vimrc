@@ -13,7 +13,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'junegunn/vim-easy-align'
-Plugin 'rking/ag.vim'
+Plugin 'mileszs/ack.vim'
 
 " Colors
 Plugin 'altercation/vim-colors-solarized'
@@ -219,6 +219,12 @@ let g:airline_symbols.linenr = '␊'
 let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.whitespace = 'Ξ'
+
+let g:ackprg = 'ag --vimgrep --smart-case'
+cnoreabbrev ag Ack
+cnoreabbrev aG Ack
+cnoreabbrev Ag Ack
+cnoreabbrev AG Ack
 
 " OCaml
 
