@@ -29,3 +29,6 @@ Temporary Items
 .tern-port
 .nrepl-port
 .envrc
+
+.idea/
+*.iml
