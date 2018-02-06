@@ -2,7 +2,7 @@
 	name = Allison Lara
 	email = allison@alliesaur.us
 [core]
-	editor = tmux_vim.sh
+	editor = vim
     pager = less -X -R
 [color]
     ui = true
