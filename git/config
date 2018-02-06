@@ -1,5 +1,6 @@
 [user]
-    name = Allison Lara
+	name = Allison Lara
+	email = allison@alliesaur.us
 [core]
 	editor = tmux_vim.sh
     pager = less -X -R
