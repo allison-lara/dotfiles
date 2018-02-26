@@ -1,77 +1,85 @@
-" Vundle
 set shell=/bin/bash
 set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
 
-Plugin 'gmarik/Vundle.vim'
+" vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
 
 " Basic VIM
-Plugin 'bling/vim-airline'
-Plugin 'kien/ctrlp.vim'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'mileszs/ack.vim'
+Plug 'bling/vim-airline'
+Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'junegunn/vim-easy-align'
+Plug 'mileszs/ack.vim'
 
 " Colors
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tomasr/molokai'
-Plugin 'gummesson/stereokai.vim'
-Plugin 'sonjapeterson/1989.vim'
-Plugin 'andreasvc/vim-256noir'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tomasr/molokai'
+Plug 'gummesson/stereokai.vim'
+Plug 'sonjapeterson/1989.vim'
+Plug 'andreasvc/vim-256noir'
 
 " git
-Plugin 'airblade/vim-gitgutter'
-" Plugin 'tpope/vim-fugitive'
-Plugin 'rhysd/committia.vim'
-Plugin 'jreybert/vimagit'
+Plug 'airblade/vim-gitgutter'
+Plug 'rhysd/committia.vim'
 
 " Programming things
-Plugin 'tomtom/tcomment_vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/syntastic'
+Plug 'tomtom/tcomment_vim'
+if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+endif
+Plug 'scrooloose/syntastic'
 
 " Ruby
-Plugin 'tpope/vim-endwise'
+Plug 'tpope/vim-endwise'
 
 " Crystal
-Plugin 'rhysd/vim-crystal'
+Plug 'rhysd/vim-crystal'
 
 " Clojure/LISP
-Plugin 'guns/vim-clojure-static'
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'tpope/vim-fireplace'
-Plugin 'vim-scripts/paredit.vim'
+Plug 'guns/vim-clojure-static'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'tpope/vim-fireplace'
+Plug 'vim-scripts/paredit.vim'
 
 " Frontend
-Plugin 'pangloss/vim-javascript'
-Plugin 'marijnh/tern_for_vim'
-Plugin 'mxw/vim-jsx'
-Plugin 'mustache/vim-mustache-handlebars'
+Plug 'pangloss/vim-javascript'
+Plug 'marijnh/tern_for_vim'
+Plug 'mxw/vim-jsx'
+Plug 'mustache/vim-mustache-handlebars'
 
 " Erlang
-Plugin 'vim-erlang/vim-erlang-runtime'
-Plugin 'vim-erlang/vim-erlang-compiler'
-Plugin 'vim-erlang/vim-erlang-omnicomplete'
-Plugin 'vim-erlang/vim-erlang-tags'
-Plugin 'edkolev/erlang-motions.vim'
+Plug 'vim-erlang/vim-erlang-runtime'
+Plug 'vim-erlang/vim-erlang-compiler'
+Plug 'vim-erlang/vim-erlang-omnicomplete'
+Plug 'vim-erlang/vim-erlang-tags'
+Plug 'edkolev/erlang-motions.vim'
 
 " Elixir
-Plugin 'elixir-lang/vim-elixir'
+Plug 'elixir-lang/vim-elixir'
 
 "OCaml
-Plugin 'def-lkb/ocp-indent-vim'
+Plug 'def-lkb/ocp-indent-vim'
 
 " Scala
-Plugin 'derekwyatt/vim-scala'
+Plug 'derekwyatt/vim-scala'
 
 " Misc
-Plugin 'dag/vim-fish'
+Plug 'dag/vim-fish'
 
-call vundle#end()
-filetype plugin indent on
+call plug#end()
+
+let g:deoplete#enable_at_startup = 1
 
 set showcmd
 let mapleader=","
