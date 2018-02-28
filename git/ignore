@@ -36,3 +36,4 @@ Temporary Items
 .venv
 
 .overcommit.yml
+.vscode/
