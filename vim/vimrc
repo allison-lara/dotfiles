@@ -18,6 +18,7 @@ Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-easy-align'
 Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-abolish'
+Plug 'justinmk/vim-sneak'
 
 " Colors
 Plug 'tomasr/molokai'
@@ -126,23 +127,22 @@ set wildignore+=*.o,*.obj,.git,.svn,pkg,*node_modules*,*venv/*
 set wildignore+=*vendor/bundle/*,*vendor/cache/*,*vendor/gems/*,*vendor/jetty*
 set wildignore+=*target/*
 
+let g:sneak#label = 1
+
+"" Hackityhack
+set t_Co=256
+
 "" Highlighting, colors, and look
-set guifont=Sauce_Code_Powerline:h13
+set guifont=Source_Code_Pro:h13
 
 syntax enable
 
-if (has("gui_running"))
-    set background=light
-else
-    set background=dark
-    let g:solarized_contrast="high"
-endif
-"" Hackityhack
-set t_Co=256
-let g:solarized_termcolors=256
+
 " Status line
 let g:lightline = { 'colorscheme': 'molokai', }
 colorscheme molokai
+
+highlight ColorColumn guibg=lightcoral
 
 "" Current line, only in insert mode
 autocmd InsertLeave * set nocursorline
@@ -181,6 +181,11 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+nnoremap k gk
+nnoremap j gj
+nnoremap gk k
+nnoremap gj j
+
 "" Quick swap between normal and relative line numbers
 function! NumberToggle()
     if(&relativenumber == 1)
@@ -196,9 +201,9 @@ nnoremap <C-L> :call NumberToggle()<cr>
 highlight clear SignColumn
 
 "" Marked support on OSX
-" if has("gui_macvim")
+if has("gui_macvim")
     :nnoremap <leader>m :silent !open -a 'Marked 2.app' '%:p'<cr>
-" endif
+endif
 
 "" Syntastic suggested config
 " set statusline+=%#warningmsg#
@@ -214,7 +219,8 @@ let g:syntastic_ocaml_checkers = ['merlin']
 let g:syntastic_javascript_checkers = ['standard']
 let g:syntastic_scss_checkers = ['scss_lint']
 let g:syntastic_ruby_checkers = ['rubocop', 'mri']
-let g:syntastic_ruby_rubocop_exec = '/Users/allisonkeene/.rbenv/shims/rubocop'
+let g:syntastic_python_checkers = ['flake8', 'pylint']
+let g:syntastic_python_pylint_args = '-E'
 
 let g:ackprg = 'ag --vimgrep --smart-case'
 cnoreabbrev ag Ack
