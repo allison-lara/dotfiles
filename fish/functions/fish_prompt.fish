@@ -27,11 +27,6 @@ function fish_prompt --description 'Write out the prompt'
 		set -g __fish_prompt_normal (set_color normal)
 	end
 
-	# PWD
-    if set -q VIRTUAL_ENV
-        echo -n -s (set_color -b blue white) "(" (basename "$VIRTUAL_ENV") ")" (set_color normal) " "
-    end
-
 	set_color $fish_color_cwd
 	echo -n (prompt_pwd)
 	set_color normal
