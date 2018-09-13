@@ -29,7 +29,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'rhysd/committia.vim'
 
 " Programming things
-Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-commentary'
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -38,6 +38,13 @@ else
     Plug 'roxma/vim-hug-neovim-rpc'
 endif
 Plug 'scrooloose/syntastic'
+
+" Infra
+Plug 'hashivim/vim-terraform'
+autocmd FileType terraform setlocal commentstring=#%s
+let g:terraform_align=1
+let g:terraform_fold_sections=0
+let g:terraform_remap_spacebar=0
 
 " Ruby
 Plug 'tpope/vim-endwise'

@@ -37,3 +37,8 @@ Temporary Items
 
 .overcommit.yml
 .vscode/
+
+.classpath
+.factorypath
+.project
+.settings/

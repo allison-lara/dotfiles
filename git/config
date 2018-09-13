@@ -20,7 +20,7 @@
     standup = "!git log --since yesterday --author `git config user.email` --pretty=short"
     st = status -sb
     authors = "!git log --all --format='%aN <%cE>' | sort -u"
-    sync = "!f(){ local branch=`git symbolic-ref HEAD | cut -d/ -f3-`; git pull upstream $branch && git push origin $branch; }; f"
+    fsync = "!f(){ local branch=`git symbolic-ref HEAD | cut -d/ -f3-`; git pull upstream $branch && git push origin $branch; }; f"
     make-fetch-happen = fetch --all -p --tags
     praise = blame
 	discard = checkout --
