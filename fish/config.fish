@@ -1,5 +1,5 @@
-. ~/.config/fish/colors.fish
-. ~/.config/fish/z.fish
+source ~/.config/fish/colors.fish
+source ~/.config/fish/z.fish
 
 set -gx EDITOR vim
 set -gx TZ 'America/Los_Angeles'
@@ -10,7 +10,7 @@ bind \cf complete
 
 # rbenv
 if test (which rbenv ^ /dev/null)
-    status --is-interactive; and . (rbenv init -|psub)
+    status --is-interactive; and source (rbenv init -|psub)
 end
 
 if test (which hub ^ /dev/null)
@@ -18,7 +18,7 @@ if test (which hub ^ /dev/null)
 end
 
 if test -f ~/.config/fish/local.fish
-    . ~/.config/fish/local.fish
+    source ~/.config/fish/local.fish
 end
 
 if test -d ~/go
