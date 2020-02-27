@@ -28,13 +28,17 @@
 	staged = diff --cached
     pr = !"pr() { git fetch upstream pull/$1/head:pr-$1; git checkout pr-$1; }; pr"
     cleanup = "!git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}' | xargs git branch -D"
+    head = ls -10
 [push]
     default = upstream
 [difftool]
     prompt = false
 [mergetool]
     prompt = false
+[diff]
+    tool = vimdiff
 [merge]
+    tool = vimdiff
     conflictstyle = diff3
 [filter "media"]
     clean = git media clean %f
