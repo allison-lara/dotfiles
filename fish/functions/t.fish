@@ -1,3 +1,3 @@
-function t
+function t --wraps=task
 	task $argv; 
 end
