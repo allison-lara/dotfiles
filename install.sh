@@ -1,14 +1,13 @@
 #!/bin/bash
 
 pushd ~
-ln -fs rc/tmux.conf .tmux.conf
-ln -fs rc/spacemacs .spacemacs
-ln -fs rc/vim/vimrc .vimrc
-ln -fs rc/vim .vim 
+ln -fs dotfiles/tmux.conf .tmux.conf
+ln -fs dotfiles/vim/vimrc .vimrc
+ln -fs dotfiles/vim .vim 
 popd
 
 mkdir -p ~/.config
 pushd ~/.config
-ln -Fs ~/rc/fish fish
-ln -Fs ~/rc/git git
+ln -Fs ~/dotfiles/fish fish
+ln -Fs ~/dotfiles/git git
 popd
