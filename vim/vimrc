@@ -3,30 +3,37 @@ set nocompatible
 
 " vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/.vim/plugged')
 
 " Basic VIM
 Plug 'itchyny/lightline.vim'
-Plug 'kien/ctrlp.vim'
+" Plug 'kien/ctrlp.vim'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/vim-easy-align'
 Plug 'mileszs/ack.vim'
 Plug 'tpope/vim-abolish'
 Plug 'justinmk/vim-sneak'
+Plug 'michaeljsmith/vim-indent-object'
 
 " Colors
 Plug 'tomasr/molokai'
+Plug 'tssm/fairyfloss.vim'
+Plug 'treycucco/vim-monotonic'
+Plug 'abnt713/vim-hashpunk'
 
 " git
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'rhysd/committia.vim'
+Plug 'jez/vim-github-hub'
 
 " Programming things
 Plug 'tpope/vim-commentary'
@@ -37,7 +44,10 @@ else
     Plug 'roxma/nvim-yarp'
     Plug 'roxma/vim-hug-neovim-rpc'
 endif
-Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
+Plug 'maximbaz/lightline-ale'
+Plug 'sbdchd/neoformat'
+Plug 'benmills/vimux'
 
 " Infra
 Plug 'hashivim/vim-terraform'
@@ -59,10 +69,9 @@ Plug 'tpope/vim-fireplace'
 Plug 'vim-scripts/paredit.vim'
 
 " Frontend
-Plug 'pangloss/vim-javascript'
-Plug 'marijnh/tern_for_vim'
+" Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
-Plug 'mustache/vim-mustache-handlebars'
+Plug 'flowtype/vim-flow'
 
 " Erlang
 Plug 'vim-erlang/vim-erlang-runtime'
@@ -133,20 +142,46 @@ set noerrorbells		" Silence, you!
 set wildignore+=*.o,*.obj,.git,.svn,pkg,*node_modules*,*venv/*
 set wildignore+=*vendor/bundle/*,*vendor/cache/*,*vendor/gems/*,*vendor/jetty*
 set wildignore+=*target/*
+set wildignore+=*/.dist/*
 
 let g:sneak#label = 1
 
 "" Hackityhack
-set t_Co=256
+" set t_Co=256
+set termguicolors
+let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
+let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
 
 "" Highlighting, colors, and look
-set guifont=Source_Code_Pro:h13
+set guifont=Fira_Code:h13
 
 syntax enable
 
 
 " Status line
 let g:lightline = { 'colorscheme': 'molokai', }
+let g:lightline.component_function = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \  'gitbranch': 'fugitive#head',
+      \ }
+let g:lightline.component_type = {
+      \     'linter_checking': 'left',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'left',
+      \ }
+let g:lightline.active = { 
+      \ 'left': [ [ 'mode', 'paste'],
+      \           [ 'readonly', 'gitbranch', 'filename', 'modified' ] ],
+      \ 'right': [ 
+      \            [ 'tags_running' ],
+      \            [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]
+      \          ],
+      \ }
+
 colorscheme molokai
 
 highlight ColorColumn guibg=lightcoral
@@ -166,6 +201,9 @@ autocmd FileType javascript RainbowParenthesesLoadBraces
 autocmd FileType jsx RainbowParenthesesLoadBraces
 autocmd FileType clojure RainbowParenthesesLoadRound
 
+autocmd BufWritePre *.js Neoformat prettier
+autocmd BufWritePre *.jsx Neoformat prettier
+
 "" Key Mappings
 nmap <silent> <leader>/ :silent :nohlsearch<CR>
 
@@ -177,7 +215,9 @@ nnoremap <silent> <Left> :GitGutterPrevHunk<CR>
 nnoremap <silent> <Right> :GitGutterNextHunk<CR>
 inoremap <silent> <Left> :GitGutterPrevHunk<CR>
 inoremap <silent> <Right> :GitGutterNextHunk<CR>
-nnoremap <C-N> :CtrlPBuffer<CR>
+" nnoremap <C-N> :CtrlPBuffer<CR>
+nnoremap <C-P> :GFiles --exclude-standard --others --cached<CR>
+nnoremap <C-N> :Buffers<CR>
 inoremap <silent> jj <ESC>
 
 au Filetype clojure nmap <c-c><c-k> :Require<cr>
@@ -192,6 +232,8 @@ nnoremap k gk
 nnoremap j gj
 nnoremap gk k
 nnoremap gj j
+
+runtime macros/matchit.vim
 
 "" Quick swap between normal and relative line numbers
 function! NumberToggle()
@@ -212,33 +254,26 @@ if has("gui_macvim")
     :nnoremap <leader>m :silent !open -a 'Marked 2.app' '%:p'<cr>
 endif
 
-"" Syntastic suggested config
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
+let g:ale_ruby_rubocop_executable = 'bundle'
+let g:ale_fixers = {
+            \  'javascript': ['eslint'],
+            \}
+let g:ale_fix_on_save = 1
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_ocaml_checkers = ['merlin']
-let g:syntastic_javascript_checkers = ['standard']
-let g:syntastic_scss_checkers = ['scss_lint']
-let g:syntastic_ruby_checkers = ['rubocop', 'mri']
-let g:syntastic_python_checkers = ['flake8', 'pylint']
-let g:syntastic_python_pylint_args = '-E'
-
-let g:ackprg = 'ag --vimgrep --smart-case'
+let g:ackprg = 'rg --vimgrep --smart-case'
 cnoreabbrev ag Ack
 cnoreabbrev aG Ack
 cnoreabbrev Ag Ack
 cnoreabbrev AG Ack
+cnoreabbrev rg Ack
+cnoreabbrev rG Ack
+cnoreabbrev Rg Ack
+cnoreabbrev RG Ack
 
 " OCaml
 
-let g:opamshare = substitute(system('opam config var share'), '\n$','','''')
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
+" let g:opamshare = substitute(system('opam config var share'), '\n$','','''')
+" execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 "" Bring in local settings that shouldn't be in public repo
 if filereadable($HOME . "/vimfiles/vimrc.local")
