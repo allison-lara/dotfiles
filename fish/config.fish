@@ -30,10 +30,6 @@ if test -d ~/.local/bin
     set PATH ~/.local/bin $PATH
 end
 
-if test (which direnv ^ /dev/null)
-    eval (direnv hook fish)
-end
-
 if test -d /Applications/Postgres.app
     set -l PSQL_PATH "/Applications/Postgres.app/Contents/Versions/latest/bin"
     set PATH $PSQL_PATH $PATH

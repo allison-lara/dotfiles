@@ -91,6 +91,7 @@ Plug 'derekwyatt/vim-scala'
 
 " Misc
 Plug 'dag/vim-fish'
+Plug 'kchmck/vim-coffee-script'
 
 call plug#end()
 
@@ -110,6 +111,7 @@ set cmdheight=2         " 2 row status
 set number              " line numbers
 
 set ruler
+set foldlevel=3
 "}}}
 
 " Whitespace

@@ -6,7 +6,6 @@ Includes:
 
 * fish
 * tmux
-* spacemacs
 * vim
 
 ## Setup
