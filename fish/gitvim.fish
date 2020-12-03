@@ -1,2 +1,6 @@
 #!/usr/bin/env fish
-fishyvim $argv;
+if test -n "$VSCODE"
+    code -w $argv
+else
+    vim --nomru $argv
+end
