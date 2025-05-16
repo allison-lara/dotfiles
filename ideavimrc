@@ -3,7 +3,9 @@ set scrolloff=3
 set ignorecase smartcase
 set showmode
 set history=1000
+
 set surround
+set commentary
 
 let mapleader=","
 let maplocalleader=",,"

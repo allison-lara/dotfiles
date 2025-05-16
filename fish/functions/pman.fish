@@ -1,5 +1,3 @@
 function pman
-	set -l PSFILE (mktemp -t manpage-$argv).ps
-	man -t $argv > $PSFILE
-    open $PSFILE
+    man -t $argv | ps2pdf - - | open -f -a "Preview"
 end

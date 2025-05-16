@@ -1,139 +1,32 @@
-set shell=/bin/bash
-set nocompatible
-
-" vim-plug
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-call plug#begin('~/.vim/plugged')
-
-" Basic VIM
-Plug 'itchyny/lightline.vim'
-" Plug 'kien/ctrlp.vim'
-Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
-Plug 'junegunn/vim-easy-align'
-Plug 'mileszs/ack.vim'
-Plug 'tpope/vim-abolish'
-Plug 'justinmk/vim-sneak'
-Plug 'michaeljsmith/vim-indent-object'
-
-" Colors
-Plug 'tomasr/molokai'
-Plug 'tssm/fairyfloss.vim'
-Plug 'treycucco/vim-monotonic'
-Plug 'abnt713/vim-hashpunk'
-
-" git
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-Plug 'rhysd/committia.vim'
-Plug 'jez/vim-github-hub'
-
-" Programming things
-Plug 'tpope/vim-commentary'
-if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-endif
-Plug 'w0rp/ale'
-Plug 'maximbaz/lightline-ale'
-Plug 'sbdchd/neoformat'
-Plug 'benmills/vimux'
-
-" Infra
-Plug 'hashivim/vim-terraform'
-autocmd FileType terraform setlocal commentstring=#%s
-let g:terraform_align=1
-let g:terraform_fold_sections=0
-let g:terraform_remap_spacebar=0
-
-" Ruby
-Plug 'tpope/vim-endwise'
-
-" Crystal
-Plug 'rhysd/vim-crystal'
-
-" Clojure/LISP
-Plug 'guns/vim-clojure-static'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'tpope/vim-fireplace'
-Plug 'vim-scripts/paredit.vim'
-
-" Frontend
-" Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'flowtype/vim-flow'
-
-" Erlang
-Plug 'vim-erlang/vim-erlang-runtime'
-Plug 'vim-erlang/vim-erlang-compiler'
-Plug 'vim-erlang/vim-erlang-omnicomplete'
-Plug 'vim-erlang/vim-erlang-tags'
-Plug 'edkolev/erlang-motions.vim'
-
-" Elixir
-Plug 'elixir-lang/vim-elixir'
-
-"OCaml
-Plug 'def-lkb/ocp-indent-vim'
-
-" Scala
-Plug 'derekwyatt/vim-scala'
-
-" Misc
-Plug 'dag/vim-fish'
-Plug 'kchmck/vim-coffee-script'
-
-call plug#end()
-
-let g:deoplete#enable_at_startup = 1
+" Plugins
+so ~/.config/vim/plugins.vim
 
 set showcmd
 let mapleader=","
 let maplocalleader=",,"
 
 " Editor layout {{{
-set termencoding=utf-8
-set encoding=utf-8
-set lazyredraw
-set laststatus=2        " Always add status line even if one window.
 set showtabline=2       " Always show tab bar
 set cmdheight=2         " 2 row status
 set number              " line numbers
-
-set ruler
-set foldlevel=3
 "}}}
 
 " Whitespace
 set nowrap                      " Don't wrap
 set tabstop=4 shiftwidth=4      " four space tabs
 set expandtab                   " spaces not tabs
-set backspace=indent,eol,start  " Allow backspace over anything in ins
-set colorcolumn=79
+set colorcolumn=80
 
 " Searching
 set hlsearch                    " hightlight matches
-set incsearch                   " incremental search
 set ignorecase                  " searches are case insensitive...
 set smartcase                   " ... unless you start using case
 
-set listchars=tab:»·,trail:·,extends:#,nbsp:·
 set pastetoggle=<F2>
 nnoremap <F8> :setl noai nocin nosi inde=<CR>
 " }}}
 
 " Vim behavior
-set history=1000
 set undolevels=1000
 set nobackup
 set noswapfile
@@ -146,43 +39,10 @@ set wildignore+=*vendor/bundle/*,*vendor/cache/*,*vendor/gems/*,*vendor/jetty*
 set wildignore+=*target/*
 set wildignore+=*/.dist/*
 
-let g:sneak#label = 1
 
-"" Hackityhack
-" set t_Co=256
-set termguicolors
-let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
-let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
 
 "" Highlighting, colors, and look
 set guifont=Fira_Code:h13
-
-syntax enable
-
-
-" Status line
-let g:lightline = { 'colorscheme': 'molokai', }
-let g:lightline.component_function = {
-      \  'linter_checking': 'lightline#ale#checking',
-      \  'linter_warnings': 'lightline#ale#warnings',
-      \  'linter_errors': 'lightline#ale#errors',
-      \  'linter_ok': 'lightline#ale#ok',
-      \  'gitbranch': 'fugitive#head',
-      \ }
-let g:lightline.component_type = {
-      \     'linter_checking': 'left',
-      \     'linter_warnings': 'warning',
-      \     'linter_errors': 'error',
-      \     'linter_ok': 'left',
-      \ }
-let g:lightline.active = { 
-      \ 'left': [ [ 'mode', 'paste'],
-      \           [ 'readonly', 'gitbranch', 'filename', 'modified' ] ],
-      \ 'right': [ 
-      \            [ 'tags_running' ],
-      \            [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]
-      \          ],
-      \ }
 
 colorscheme molokai
 
@@ -193,49 +53,49 @@ autocmd InsertLeave * set nocursorline
 autocmd InsertEnter * set cursorline
 
 "" File type settings
-au BufNewFile,BufRead *.cshtml set filetype=html
-au BufNewFile,BufRead Gemfile set filetype=ruby
-au BufNewFile,BufRead *.md set filetype=markdown
 autocmd Filetype gitcommit setlocal spell textwidth=72
 autocmd Filetype markdown setlocal spell textwidth=72
-au VimEnter * RainbowParenthesesActivate
-autocmd FileType javascript RainbowParenthesesLoadBraces
-autocmd FileType jsx RainbowParenthesesLoadBraces
-autocmd FileType clojure RainbowParenthesesLoadRound
-
-autocmd BufWritePre *.js Neoformat prettier
-autocmd BufWritePre *.jsx Neoformat prettier
 
 "" Key Mappings
 nmap <silent> <leader>/ :silent :nohlsearch<CR>
 
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
-nmap <silent> <leader>sc :SyntasticCheck<CR>
 nmap <silent> <leader>ts :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
-nnoremap <silent> <Left> :GitGutterPrevHunk<CR>
-nnoremap <silent> <Right> :GitGutterNextHunk<CR>
-inoremap <silent> <Left> :GitGutterPrevHunk<CR>
-inoremap <silent> <Right> :GitGutterNextHunk<CR>
-" nnoremap <C-N> :CtrlPBuffer<CR>
-nnoremap <C-P> :GFiles --exclude-standard --others --cached<CR>
+nnoremap <C-P> :GFiles<CR>
 nnoremap <C-N> :Buffers<CR>
+nnoremap <silent> <leader>fc :GFiles?<CR>
+nnoremap <silent> <leader>f :GFiles<CR>
+nnoremap <silent> <leader>ff :Files<CR>
+nnoremap <silent> <leader>fb :Buffers<CR>
+nnoremap <silent> <leader>fh :Helptags<CR>
+nnoremap <silent> <leader>fm :Marks<CR>
 inoremap <silent> jj <ESC>
-
-au Filetype clojure nmap <c-c><c-k> :Require<cr>
-
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
 
 nnoremap k gk
 nnoremap j gj
 nnoremap gk k
 nnoremap gj j
 
-runtime macros/matchit.vim
+" ALE Config
+
+let g:ale_fixers={
+            \'*': ['remove_trailing_lines', 'trim_whitespace'],
+            \'typescript': ['prettier', 'eslint', 'remove_trailing_lines', 'trim_whitespace'],
+            \'javascript': ['prettier', 'eslint', 'remove_trailing_lines', 'trim_whitespace'],
+            \'typescriptreact': ['prettier', 'eslint', 'remove_trailing_lines', 'trim_whitespace'],
+            \'javascriptreact': ['prettier', 'eslint', 'remove_trailing_lines', 'trim_whitespace'],
+            \'hcl': ['terraform', 'remove_trailing_lines', 'trim_whitespace'],
+            \'sh': ['shfmt', 'remove_trailing_lines', 'trim_whitespace'],
+            \}
+nmap <silent> <leader>af <Plug>(ale_fix)
+nmap <silent> <leader>d <Plug>(ale_go_to_definition)
+nmap <silent> <leader>dt <Plug>(ale_go_to_definition_in_tab)
+nmap <silent> <leader>t <Plug>(ale_go_to_type_definition)
+nmap <silent> <leader>tt <Plug>(ale_go_to_type_definition_in_tab)
+nmap <silent> <leader>i <Plug>(ale_go_to_implementation)
+nmap <silent> <leader>it <Plug>(ale_go_to_implementation_in_tab)
+" let g:ale_fix_on_save = 1
 
 "" Quick swap between normal and relative line numbers
 function! NumberToggle()
@@ -248,40 +108,10 @@ endfunc
 
 nnoremap <C-L> :call NumberToggle()<cr>
 
-"" Clear highlight on sign gutter, for gitgutter
-highlight clear SignColumn
-
-"" Marked support on OSX
-if has("gui_macvim")
-    :nnoremap <leader>m :silent !open -a 'Marked 2.app' '%:p'<cr>
-endif
-
-let g:ale_ruby_rubocop_executable = 'bundle'
-let g:ale_fixers = {
-            \  'javascript': ['eslint'],
-            \}
-let g:ale_fix_on_save = 1
-
-let g:ackprg = 'rg --vimgrep --smart-case'
-cnoreabbrev ag Ack
-cnoreabbrev aG Ack
-cnoreabbrev Ag Ack
-cnoreabbrev AG Ack
-cnoreabbrev rg Ack
-cnoreabbrev rG Ack
-cnoreabbrev Rg Ack
-cnoreabbrev RG Ack
-
-" OCaml
-
-" let g:opamshare = substitute(system('opam config var share'), '\n$','','''')
-" execute "set rtp+=" . g:opamshare . "/merlin/vim"
-
 "" Bring in local settings that shouldn't be in public repo
 if filereadable($HOME . "/vimfiles/vimrc.local")
     source $HOME/vimfiles/vimrc.local
 endif
-if filereadable($HOME . "/.vim/vimrc.local")
-    source $HOME/.vim/vimrc.local
+if filereadable($HOME . "/.config/vim/vimrc.local")
+    source $HOME/.config/vim/vimrc.local
 endif
-

@@ -3,7 +3,7 @@
 	email = allison@alliesaur.us
 [core]
 	editor = vim
-    pager = less -X -R
+    pager = delta
 [color]
     ui = true
 [alias]
@@ -31,6 +31,9 @@
     head = ls -10
     remote-fetch = "!rf() { git config --add remote.origin.fetch +refs/heads/$1:refs/remotes/origin/$1; git fetch origin +$1:refs/remotes/origin/$1; }; rf"
     remote-purge = "!rp() { git config --unset remote.origin.fetch \".*$1.*\"; git update-ref -d refs/remotes/origin/$1; }; rp"
+    wip = commit -am "WIP" --no-verify
+    mb = "!f() { git checkout --no-track -b allisonlara/$1 $2; }; f"
+    it-done = "!git checkout main && git make-fetch-happen && git pull && git cleanup"
 [push]
     default = upstream
 [difftool]
@@ -39,6 +42,7 @@
     prompt = false
 [diff]
     tool = vimdiff
+    colorMoved = default
 [merge]
     tool = vimdiff
     conflictstyle = diff3
@@ -63,8 +67,11 @@
     oldHighlight = red bold 52
     newNormal = green bold
     newHighlight = green bold 22
-[pager]
-    diff = diff-so-fancy | less --tabs=4 -RFX
-    show = diff-so-fancy | less --tabs=4 -RFX
 [include]
     path = local.gitconfig
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true
+    light = false
+    line-number = true
