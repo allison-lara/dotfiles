@@ -1,0 +1,43 @@
+call plug#begin()
+
+Plug 'tpope/sensible'
+Plug 'tpope/vim-flagship'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+
+call plug#end()
+
+set termencoding=utf-8
+set encoding=utf-8
+set laststatus=2
+set showtabline=2
+set number
+
+set tabstop=4 shiftwidth=4
+set expandtab
+
+set undolevels=1000
+set nobackup
+set noswapfile
+
+set guifont=Fira_Code:h13
+set guioptions-=e
+
+set hlsearch
+set showcmd
+let mapleader=","
+let localleader="\\"
+
+nnoremap <leader>ev :split $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+nmap <silent> <leader>/ :silent :nohlsearch<CR>
+inoremap <silent> jj <ESC>
+
+nnoremap k gk
+nnoremap j gj
+nnoremap gk k
+nnoremap gj j
+

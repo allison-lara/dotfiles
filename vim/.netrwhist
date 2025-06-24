@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/Users/allison/.config/fish'
+let g:netrw_dirhist_5='/Users/allison/.config/fish/functions'
+let g:netrw_dirhist_4='/Users/allison/.config/fish'
+let g:netrw_dirhist_3='/Users/allison/.config/vim'
+let g:netrw_dirhist_2='/Users/allison/dotfiles/vim.old'
+let g:netrw_dirhist_1='/Users/allison/.config/vim'
