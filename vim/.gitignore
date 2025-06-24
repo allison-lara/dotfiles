@@ -1,5 +1,5 @@
 .netrwhist
-vimrc.local
+localvimrc
 plugged/
 autoload/plug.vim
 

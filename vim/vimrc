@@ -1,3 +1,6 @@
+" Plugins
+so ~/.config/vim/plugins.vim
+
 " Simple and clean
 set termencoding=utf-8
 set encoding=utf-8
@@ -30,3 +33,8 @@ nnoremap k gk
 nnoremap j gj
 nnoremap gk k
 nnoremap gj j
+
+" Local-only config
+if filereadable("~/.config/vim/localvimrc")
+    so ~/.config/vim/localvimrc
+endif

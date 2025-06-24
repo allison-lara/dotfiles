@@ -1,0 +1,13 @@
+layout_hermit() {
+  ./bin/hermit env --activate > /tmp/$$.bash; source /tmp/$$.bash; rm /tmp/$$.bash;
+}
+
+layout_sqm_service() {
+  echo "sqm-service: $1"
+  local service=$1
+  export SQM_SERVICE=$service
+  export SQM_REGION=us-west-2
+  export SQM_ENV=staging
+  export DATABASE_NAME=$service
+  export DATABASE_CLUSTER=${service}-001
+}
