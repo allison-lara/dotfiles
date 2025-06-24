@@ -1,4 +1,3 @@
-tap "homebrew/services"
 tap "d12frosted/emacs-plus"
 
 brew "delta"
