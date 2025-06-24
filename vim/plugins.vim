@@ -9,7 +9,7 @@ call plug#begin()
 
 Plug 'editorconfig/editorconfig-vim'
 
-Plug 'tpope/sensible'
+Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-flagship'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'

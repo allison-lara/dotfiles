@@ -32,3 +32,8 @@ nnoremap k gk
 nnoremap j gj
 nnoremap gk k
 nnoremap gj j
+
+" Local-only config
+if filereadable("~/.config/vim/localvimrc")
+    so ~/.config/vim/localvimrc
+endif
