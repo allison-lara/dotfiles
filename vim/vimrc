@@ -1,117 +1,34 @@
 " Plugins
 so ~/.config/vim/plugins.vim
 
-set showcmd
-let mapleader=","
-let maplocalleader=",,"
+set termencoding=utf-8
+set encoding=utf-8
+set laststatus=2
+set showtabline=2
+set number
 
-" Editor layout {{{
-set showtabline=2       " Always show tab bar
-set cmdheight=2         " 2 row status
-set number              " line numbers
-"}}}
+set tabstop=4 shiftwidth=4
+set expandtab
 
-" Whitespace
-set nowrap                      " Don't wrap
-set tabstop=4 shiftwidth=4      " four space tabs
-set expandtab                   " spaces not tabs
-set colorcolumn=80
-
-" Searching
-set hlsearch                    " hightlight matches
-set ignorecase                  " searches are case insensitive...
-set smartcase                   " ... unless you start using case
-
-set pastetoggle=<F2>
-nnoremap <F8> :setl noai nocin nosi inde=<CR>
-" }}}
-
-" Vim behavior
 set undolevels=1000
 set nobackup
 set noswapfile
 
-set noshowmode
-set noerrorbells		" Silence, you!
-
-set wildignore+=*.o,*.obj,.git,.svn,pkg,*node_modules*,*venv/*
-set wildignore+=*vendor/bundle/*,*vendor/cache/*,*vendor/gems/*,*vendor/jetty*
-set wildignore+=*target/*
-set wildignore+=*/.dist/*
-
-
-
-"" Highlighting, colors, and look
 set guifont=Fira_Code:h13
+set guioptions-=e
 
-colorscheme molokai
+set hlsearch
+set showcmd
+let mapleader=","
+let localleader="\\"
 
-highlight ColorColumn guibg=lightcoral
+nnoremap <leader>ev :split $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
 
-"" Current line, only in insert mode
-autocmd InsertLeave * set nocursorline
-autocmd InsertEnter * set cursorline
-
-"" File type settings
-autocmd Filetype gitcommit setlocal spell textwidth=72
-autocmd Filetype markdown setlocal spell textwidth=72
-
-"" Key Mappings
 nmap <silent> <leader>/ :silent :nohlsearch<CR>
-
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
-nmap <silent> <leader>ts :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
-nnoremap <C-P> :GFiles<CR>
-nnoremap <C-N> :Buffers<CR>
-nnoremap <silent> <leader>fc :GFiles?<CR>
-nnoremap <silent> <leader>f :GFiles<CR>
-nnoremap <silent> <leader>ff :Files<CR>
-nnoremap <silent> <leader>fb :Buffers<CR>
-nnoremap <silent> <leader>fh :Helptags<CR>
-nnoremap <silent> <leader>fm :Marks<CR>
 inoremap <silent> jj <ESC>
 
 nnoremap k gk
 nnoremap j gj
 nnoremap gk k
 nnoremap gj j
-
-" ALE Config
-
-let g:ale_fixers={
-            \'*': ['remove_trailing_lines', 'trim_whitespace'],
-            \'typescript': ['prettier', 'eslint', 'remove_trailing_lines', 'trim_whitespace'],
-            \'javascript': ['prettier', 'eslint', 'remove_trailing_lines', 'trim_whitespace'],
-            \'typescriptreact': ['prettier', 'eslint', 'remove_trailing_lines', 'trim_whitespace'],
-            \'javascriptreact': ['prettier', 'eslint', 'remove_trailing_lines', 'trim_whitespace'],
-            \'hcl': ['terraform', 'remove_trailing_lines', 'trim_whitespace'],
-            \'sh': ['shfmt', 'remove_trailing_lines', 'trim_whitespace'],
-            \}
-nmap <silent> <leader>af <Plug>(ale_fix)
-nmap <silent> <leader>d <Plug>(ale_go_to_definition)
-nmap <silent> <leader>dt <Plug>(ale_go_to_definition_in_tab)
-nmap <silent> <leader>t <Plug>(ale_go_to_type_definition)
-nmap <silent> <leader>tt <Plug>(ale_go_to_type_definition_in_tab)
-nmap <silent> <leader>i <Plug>(ale_go_to_implementation)
-nmap <silent> <leader>it <Plug>(ale_go_to_implementation_in_tab)
-" let g:ale_fix_on_save = 1
-
-"" Quick swap between normal and relative line numbers
-function! NumberToggle()
-    if(&relativenumber == 1)
-        set norelativenumber
-    else
-        set relativenumber
-    endif
-endfunc
-
-nnoremap <C-L> :call NumberToggle()<cr>
-
-"" Bring in local settings that shouldn't be in public repo
-if filereadable($HOME . "/vimfiles/vimrc.local")
-    source $HOME/vimfiles/vimrc.local
-endif
-if filereadable($HOME . "/.config/vim/vimrc.local")
-    source $HOME/.config/vim/vimrc.local
-endif
