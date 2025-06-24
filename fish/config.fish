@@ -9,6 +9,10 @@ if test (which direnv ^ /dev/null)
     direnv hook fish | source
 end
 
+if test (which fzf ^ /dev/null)
+    fzf --fish | source
+end
+
 if test -d ~/go
     set -gx GOPATH ~/go
     set PATH $GOPATH/bin $PATH
