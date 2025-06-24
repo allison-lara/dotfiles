@@ -18,5 +18,3 @@ if test -d ~/.local/bin
     set PATH ~/.local/bin $PATH
 end
 
-# OPAM configuration
-# . ~/.opam/opam-init/init.fish > /dev/null 2> /dev/null or true
