@@ -91,7 +91,7 @@ Plug 'derekwyatt/vim-scala'
 
 " Misc
 Plug 'dag/vim-fish'
-Plug 'kchmck/vim-coffee-script'
+Plug 'sirtaj/vim-openscad'
 
 call plug#end()
 
