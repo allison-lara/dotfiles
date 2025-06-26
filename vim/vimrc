@@ -34,6 +34,9 @@ nnoremap j gj
 nnoremap gk k
 nnoremap gj j
 
+let g:tablabel =
+      \ "%N%{flagship#tabmodified()} %{flagship#tabcwds('shorten',',')}"
+
 " Local-only config
 if filereadable("~/.config/vim/localvimrc")
     so ~/.config/vim/localvimrc

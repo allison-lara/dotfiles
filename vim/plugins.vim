@@ -16,6 +16,17 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 
+Plug 'dense-analysis/ale'
+
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+
+Plug 'EdenEast/nightfox.nvim'
+
 call plug#end()
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+
+autocmd User Flags call Hoist("buffer", "ale#statusline#Count")
+
+colorscheme duskfox
