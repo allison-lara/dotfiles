@@ -1,0 +1,19 @@
+theme = "catppuccin_mocha"
+
+[editor]
+rulers = [80]
+bufferline = "multiple"
+trim-trailing-whitespace = true
+
+[editor.cursor-shape]
+
+[keys.normal]
+"^" = "goto_first_nonwhitespace"
+"$" = "goto_line_end"
+
+[keys.select]
+"^" = "goto_first_nonwhitespace"
+"$" = "goto_line_end"
+
+[keys.normal.space]
+l = ":reflow"
